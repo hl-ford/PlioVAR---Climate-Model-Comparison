@@ -1,0 +1,6 @@
+# Large inputs not stored in the repository (see "Jupyter notebooks/README.md": model output, GEBCO download)
+iCESM1.2-ITPCAS/
+iCESM1.3/
+HadCM3/
+CESM1.2.2.1/
+GEBCO/

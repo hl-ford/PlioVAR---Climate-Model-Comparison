@@ -2,7 +2,7 @@
 
 Every input path used by the ``km5c`` package and the notebooks is defined
 here. Input data are not distributed with this repository; place them under
-``data/raw/`` (layout below) or point the ``KM5C_DATA_DIR`` environment
+the ``Data`` folder next to this project (layout below) or point the ``KM5C_DATA_DIR`` environment
 variable at a folder with the same layout.
 
     <KM5C_DATA_DIR>/
@@ -26,7 +26,8 @@ import os
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-DATA_DIR = Path(os.environ.get("KM5C_DATA_DIR", REPO_ROOT / "data" / "raw"))
+# inputs live in the "Data" folder next to "Jupyter notebooks" (override with KM5C_DATA_DIR)
+DATA_DIR = Path(os.environ.get("KM5C_DATA_DIR", REPO_ROOT.parent / "Data"))
 
 FIG_DIR = REPO_ROOT / "outputs" / "figures"
 TABLE_DIR = REPO_ROOT / "outputs" / "tables"

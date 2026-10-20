@@ -55,27 +55,35 @@ Figures are saved to `outputs/figures/` as PNG at 300 dpi.
 
 ## Input data
 
-The input data are **not included** here. Model output was obtained from the modelling groups; the observational and proxy datasets are available from their original publishers. Put them under `data/raw/`, or set `KM5C_DATA_DIR` to another folder, using the layout documented at the top of [`km5c/paths.py`](km5c/paths.py).
+All inputs live in the repository's top-level `Data/` folder, next to `Jupyter notebooks/` (or under `KM5C_DATA_DIR`, if set), in the layout documented at the top of [`km5c/paths.py`](km5c/paths.py).
+
+**Included in this repository** (`Data/`), the observational and proxy data:
 
 | Folder | Dataset | Source |
 |---|---|---|
-| `iCESM1.2-ITPCAS/` | KM5c (Eoi400) and 0 ka isotope-enabled simulations | *[reference]* |
-| `iCESM1.3/` | PlioMIP2 and pre-industrial isotope-enabled simulations | *[reference]* |
-| `HadCM3/` | 3.205 Ma and pre-industrial simulations; `basin_hadcm3` basin index file | *[reference]* |
-| `CESM1.2.2.1/` | Pliocene and pre-industrial carbon-isotope simulations | *[reference]* |
-| `PlioVAR_benthic/` | PlioVAR benthic δ¹⁸O/δ¹³C compilation (QC-checked) and site depths | *[reference]* |
+| `PlioVAR_benthic/` | PlioVAR benthic δ¹⁸O/δ¹³C compilation (QC-checked workbooks in `CHECKED/`) and `Site Depths.csv` | *[reference]* |
 | `PlioVAR_SST/` | PlioVAR KM5c SST compilation | *[reference / PANGAEA DOI]* |
 | `Schmittner2017/` | OC3 core-top benthic δ¹³C and δ¹⁸O compilation | Schmittner et al. (2017) *[full reference]* |
-| `GEBCO/` | GEBCO 2024 sub-ice topography grid | GEBCO Compilation Group (2024) |
 | `WOA23/` | World Ocean Atlas 2023 annual temperature, 1° | Locarnini et al. (2023) *[full reference]* |
 | `modern_d13C/` | Gridded modern δ¹³C(DIC) climatology | *[reference]* |
 | `modern_d18O/` | Gridded seawater δ¹⁸O | *[reference]* |
+
+**Not included: model output** (about 5.8 GB, too large for GitHub). *[To be made available via: Zenodo DOI / on request.]* Place the files in these folders inside `Data/`:
+
+| Folder | Dataset | Source |
+|---|---|---|
+| `iCESM1.2-ITPCAS/isotopes/`, `.../streamfunction/` | KM5c (Eoi400) and 0 ka isotope-enabled simulations | *[reference]* |
+| `iCESM1.3/isotopes/`, `.../streamfunction/` | PlioMIP2 and pre-industrial isotope-enabled simulations | *[reference]* |
+| `HadCM3/isotopes/`, `.../streamfunction/` | 3.205 Ma and pre-industrial simulations; `basin_hadcm3` basin index file | *[reference]* |
+| `CESM1.2.2.1/` | Pliocene and pre-industrial carbon-isotope simulations | *[reference]* |
+
+**Not included: bathymetry** (7.5 GB, public). Download the **GEBCO_2024 sub-ice topo/bathy** grid in netCDF format from <https://www.gebco.net/data_and_products/gridded_bathymetry_data/> and save it as `Data/GEBCO/GEBCO_2024_sub_ice_topo.nc`. Source: GEBCO Compilation Group (2024) *[full reference/DOI]*. It is only needed for the bathymetry outlines in `Proxies.ipynb` and `Site_locations.ipynb`.
 
 ## Running
 
 ```bash
 pip install -r requirements.txt          # Python 3.11; cartopy is easiest to get via conda
-export KM5C_DATA_DIR=/path/to/data       # optional; defaults to ./data/raw
+export KM5C_DATA_DIR=/path/to/data       # optional; defaults to ../Data
 cd notebooks
 jupyter notebook                          # or: jupyter nbconvert --to notebook --execute --inplace *.ipynb
 ```
@@ -84,4 +92,5 @@ Loaders are cached within a session, so a model is read and regridded at most on
 
 ## Licence
 
-Code: MIT (see `LICENSE`).
+- **Code** (`km5c/`, `notebooks/`): MIT (see `LICENSE`).
+- **Third-party data** in `Data/`: redistributed under the original providers' terms. They are not covered by the MIT licence, so please cite the sources listed under *Input data*.
